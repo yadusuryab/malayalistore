@@ -49,7 +49,7 @@ function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-64 p-0">
               <div className="flex flex-col h-full">
-                <div className="flex items-center justify-center p-4 border-b">
+                <div className="flex items-center invert justify-center p-4 border-b">
                   <Brand />
                 </div>
                 <nav className="flex-1 p-4">
