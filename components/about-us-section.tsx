@@ -183,7 +183,7 @@ export default function AboutUsSection() {
             DISCOVER OUR STORY
           </motion.span>
           <h2 className="text-2xl md:text-3xl   mb-4 text-center">
-            About traft.
+            About Malayali Store.
           </h2>
           <motion.div
             className="w-24 h-1 bg-green-100"
@@ -197,7 +197,7 @@ export default function AboutUsSection() {
           className="text-center max-w-2xl mx-auto mb-16 text-muted-forground/80  "
           variants={itemVariants}
         >
-          We’re TRAFT, a Tirur-based watch store trusted for 3+ years, offering premium first-copy brands like Rolex, Omega & Casio at everyday prices with all-India COD.
+          We’re Malayali Store, a Tirur-based watch store trusted for 3+ years, offering premium first-copy brands like Rolex, Omega & Casio at everyday prices with all-India COD.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
