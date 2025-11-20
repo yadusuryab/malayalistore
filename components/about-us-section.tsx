@@ -197,7 +197,7 @@ export default function AboutUsSection() {
           className="text-center max-w-2xl mx-auto mb-16 text-muted-forground/80  "
           variants={itemVariants}
         >
-          We’re Malayali Store, a kerala-based watch store trusted for 3+ years, offering premium first-copy brands like Rolex, Omega & Casio at everyday prices with all-India COD.
+          We’re Malayali Store, a kerala-based accessories store trusted for 3+ years, offering all accessories at everyday prices with all-India COD.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
