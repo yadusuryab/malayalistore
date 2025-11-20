@@ -150,7 +150,7 @@ const AddToCartButton = ({
         <Button
           className={`w-full gap-2 ${className}`}
           disabled={true}
-          variant="outline"
+          variant="destructive"
         >
           Out of Stock
         </Button>
@@ -158,7 +158,7 @@ const AddToCartButton = ({
           <Button
             className="w-full gap-2"
             disabled={true}
-            variant="outline"
+            variant="secondary"
           >
             <Zap className="h-4 w-4" />
             Buy Now
@@ -171,7 +171,7 @@ const AddToCartButton = ({
   if (inCart && !showBuyNow) {
     return (
       <Button
-        variant="secondary"
+        variant="outline"
         className={`w-full gap-2 ${className}`}
         onClick={() => router.push("/cart")}
       >
@@ -185,7 +185,7 @@ const AddToCartButton = ({
     <div className={`flex gap-2 ${showBuyNow ? 'flex-col' : ''}`}>
       {inCart ? (
         <Button
-          variant="secondary"
+          variant="outline"
           className={`w-full gap-2 ${className}`}
           onClick={() => router.push("/cart")}
         >
@@ -194,7 +194,7 @@ const AddToCartButton = ({
         </Button>
       ) : (
         <Button
-          variant={variant}
+          variant={"secondary"}
           className={`w-full gap-2 ${className}`}
           onClick={handleAddToCart}
           disabled={isLoading || disabled}

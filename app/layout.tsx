@@ -116,7 +116,7 @@ export default function RootLayout({
         className={` ${geistMono.variable} ${helveticaRegular.variable} ${luxuriousScript.variable} antialiased`}
       >
         <Header />
-        <div className="pt-14 px-4  md:max-w-[1000px] md:mx-auto min-h-screen">{children}</div>        <Footer/>
+        <div className="px-2  md:max-w-[1000px] md:mx-auto min-h-screen">{children}</div>        <Footer/>
         <Toaster />
       </body>
     </html>

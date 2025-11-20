@@ -7,7 +7,7 @@ function CategoryCard({ name, slug, image }: Category) {
   return (
     <Link
       href={`/products?category=${slug.toLowerCase()}`}
-      className="group relative w-24 h-24 overflow-hidden rounded-md shadow-md"
+      className="group relative w-full h-24 overflow-hidden rounded-md shadow-md"
     >
       {/* Background Image */}
       <Image

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import AddToCartButton from "@/components/utils/add-to-cart";
-import { Check, X, ShoppingCart, Zap } from "lucide-react";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 type Props = {
   product: {
@@ -147,7 +147,7 @@ const ProductBuySection = ({ product }: Props) => {
                 onClick={() => setSelectedSize(null)}
                 className="h-8 px-2 text-xs text-muted-foreground"
               >
-                <X className="h-3 w-3 mr-1" />
+                <IconX className="h-3 w-3 mr-1" />
                 Clear
               </Button>
             )}
@@ -165,7 +165,7 @@ const ProductBuySection = ({ product }: Props) => {
                 {size}
                 {selectedSize === size && (
                   <div className="absolute -top-1 -right-1 bg-primary rounded-full p-0.5">
-                    <Check className="h-3 w-3 text-white" />
+                    <IconCheck className="h-3 w-3 text-white" />
                   </div>
                 )}
               </Button>
@@ -186,7 +186,7 @@ const ProductBuySection = ({ product }: Props) => {
                 onClick={() => setSelectedColor(null)}
                 className="h-8 px-2 text-xs text-muted-foreground"
               >
-                <X className="h-3 w-3 mr-1" />
+                <IconX className="h-3 w-3 mr-1" />
                 Clear
               </Button>
             )}
@@ -204,7 +204,7 @@ const ProductBuySection = ({ product }: Props) => {
                 {color}
                 {selectedColor === color && (
                   <div className="absolute -top-1 -right-1 bg-primary rounded-full p-0.5">
-                    <Check className="h-3 w-3 text-white" />
+                    <IconCheck className="h-3 w-3 text-white" />
                   </div>
                 )}
               </Button>
@@ -234,7 +234,7 @@ const ProductBuySection = ({ product }: Props) => {
               onClick={clearSelection}
               className="h-7 px-2 text-xs"
             >
-              <X className="h-3 w-3 mr-1" />
+              <IconX className="h-3 w-3 mr-1" />
               Clear All
             </Button>
           </div>
@@ -245,10 +245,10 @@ const ProductBuySection = ({ product }: Props) => {
       <div className="pt-2 space-y-3">
         {/* Buy Now Button - Always shown */}
         <Button
-          className="w-full gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-3"
           onClick={handleBuyNow}
           disabled={isBuyNowLoading || product.quantity <= 0}
           size="lg"
+          className="w-full"
         >
           {isBuyNowLoading ? (
             <>
@@ -257,7 +257,7 @@ const ProductBuySection = ({ product }: Props) => {
             </>
           ) : (
             <>
-              <Zap className="h-5 w-5" />
+             
               Buy Now
             </>
           )}
@@ -270,13 +270,13 @@ const ProductBuySection = ({ product }: Props) => {
           selectedColor={selectedColor}
           hasSizes={product.sizes?.length > 0}
           hasColors={product.colors?.length > 0}
-          className="py-3"
+       
           variant="default"
         />
         
         {isInCart && (
           <p className="text-sm text-green-600 mt-2 flex items-center">
-            <Check className="h-4 w-4 mr-1" />
+            <IconCheck className="h-4 w-4 mr-1" />
             This item is in your cart
           </p>
         )}
@@ -293,16 +293,7 @@ const ProductBuySection = ({ product }: Props) => {
         ) : null}
         
         {/* Buy Now explanation */}
-        <p className="text-green-600 font-medium">
-          <Zap className="h-3 w-3 inline mr-1" />
-          <strong>Buy Now:</strong> Add to cart and proceed to checkout immediately
-        </p>
-        
-        {/* Add to Cart explanation */}
-        <p className="text-blue-600 font-medium">
-          <ShoppingCart className="h-3 w-3 inline mr-1" />
-          <strong>Add to Cart:</strong> Add to cart and continue shopping
-        </p>
+      
       </div>
     </div>
   );
