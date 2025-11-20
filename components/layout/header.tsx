@@ -125,7 +125,7 @@ function Header() {
     <>
       {/* Top Black Bar */}
       <div className="fixed top-0 left-0 w-full bg-black text-white py-2 z-50">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="text-center text-sm font-medium uppercase tracking-wide h-5 flex items-center justify-center">
             <span 
               className={`transition-all duration-500 ease-out ${
@@ -137,54 +137,57 @@ function Header() {
               {topTexts[currentTopText]}
             </span>
           </div>
+          <Link
+        href="/cart"
+        className=" transition-all duration-300 hover:scale-110 relative flex items-center gap-2"
+      >
+        <IconShoppingBag size={20} />
+        <span className=" sm:inline text-xs">MY CART</span>
+        {/* Cart indicator */}
+      </Link>
         </div>
       </div>
 
       {/* Main Header */}
       <header className="fixed bg-white/50 saturate-200 backdrop-blur-2xl top-8 w-full z-40 ">
-        {isMobile ? (
-          // Mobile View
-          <div className="flex items-center justify-between p-2">
-            {/* Menu Button */}
-            <button 
-              onClick={handleMenuToggle}
-              className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 uppercase text-sm font-medium tracking-wide flex items-center gap-2"
-              aria-label="Open menu"
-            >
-              <IconMenu />
-              {/* <span>MENU</span> */}
-            </button>
-            
-            {/* Logo */}
-            <Link href="/" className="flex-1 text-center transform transition-transform duration-300 hover:scale-105">
-              <Brand />
-            </Link>
-            
-            {/* Right Icons */}
-            <div className="flex items-center gap-4">
-              {/* Search Icon */}
-              <button 
-                onClick={handleSearchToggle}
-                className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 flex items-center gap-2"
-                aria-label="Search"
-              >
-                {/* <IconSearch size={20} /> */}
-                <span className=" sm:inline">SEARCH</span>
-              </button>
-              
-              {/* Cart */}
-              <Link
-                href="/cart"
-                className="p-2 transition-all duration-300 hover:scale-110 relative flex items-center gap-2"
-              >
-                <IconShoppingBag size={20} />
-                <span className="hidden sm:inline">CART</span>
-                {/* Cart indicator */}
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-500 rounded-full animate-pulse" />
-              </Link>
-            </div>
-          </div>
-        ) : (
+      {isMobile ? (
+  // Mobile View
+  <div className="flex items-center justify-between p-2">
+    {/* Menu Button */}
+    <button 
+      onClick={handleMenuToggle}
+      className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 uppercase text-sm font-medium tracking-wide flex items-center gap-2"
+      aria-label="Open menu"
+    >
+      <IconMenu />
+      {/* <span>MENU</span> */}
+    </button>
+    
+    {/* Logo - Centered with flex-1 and proper alignment */}
+    <div className="flex-1 flex justify-center">
+      <Link href="/" className="transform transition-transform duration-300 hover:scale-105">
+        <Brand />
+      </Link>
+    </div>
+    
+    {/* Right Icons */}
+    <div className="flex items-center gap-4">
+      {/* Search Icon */}
+      <button 
+        onClick={handleSearchToggle}
+        className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 flex items-center gap-2"
+        aria-label="Search"
+      >
+        {/* <IconSearch size={20} /> */}
+        <span className=" sm:inline"><IconSearch size={20} /></span>
+      </button>
+      
+      {/* Cart */}
+    
+    </div>
+  </div>
+) : (
+  // Desktop view would go her : (
           // Desktop View
           <div className="flex items-center justify-between p-6">
             {/* Logo - Left */}
@@ -219,7 +222,7 @@ function Header() {
                            after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black 
                            after:transition-all after:duration-500 hover:after:w-full"
               >
-                SEARCH
+                <IconSearch size={20} />
               </button>
 
               {/* Account */}
@@ -359,7 +362,7 @@ function Header() {
       </Sheet>
 
       {/* Spacer for fixed header */}
-      <div className="h-28"></div>
+      <div className="h-28 md:h-32"></div>
     </>
   );
 }
