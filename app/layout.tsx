@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import OGImage from '@/public/og-image.png'
 import React from "react";
-import Footer from "@/components/layout/footer";
+import {Footer} from "@/components/layout/footer";
 
 // Helvetica Regular from public folder
 const helveticaRegular = localFont({

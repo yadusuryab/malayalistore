@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 function Brand() {
   return (
-    <Image src={logo.src} width={80} height={30} alt={process.env.NEXT_PUBLIC_APP_NAME || 'SHOPIGO'} />
+    <Image src={logo.src} width={70} height={70} alt={process.env.NEXT_PUBLIC_APP_NAME || 'SHOPIGO'} />
 
   )
 }
