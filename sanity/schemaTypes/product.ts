@@ -1,0 +1,88 @@
+export default {
+  name: 'product',
+  title: 'Product',
+  type: 'document',
+  fields: [
+    {
+      name: 'name',
+      title: 'Product Name',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'images',
+      title: 'Product Images',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'salesPrice',
+      title: 'Sales Price',
+      type: 'number',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'sizes',
+      title: 'Available Sizes',
+      type: 'array',
+      of: [{ type: 'string' }],
+    },
+    {
+      name: 'colors',
+      title: 'Available Colors',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List available colors (e.g., Red, Blue, Black)',
+    },
+    {
+      name: 'features',
+      title: 'Key Features',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List key features (like material, design, fit, etc.)',
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+    },
+    {
+      name: 'featured',
+      title: 'Featured Product',
+      type: 'boolean',
+      initialValue: false,
+    },
+    {
+      name: 'quantity',
+      title: 'Stock Quantity',
+      type: 'number',
+      validation: (Rule: any) => Rule.min(0),
+    },
+    {
+      name: 'soldOut',
+      title: 'Sold Out',
+      type: 'boolean',
+      initialValue: false,
+    },
+    {
+      name: 'rating',
+      title: 'Average Rating',
+      type: 'number',
+      description: 'Average rating out of 5 (e.g., 4.3)',
+      validation: (Rule: any) => Rule.min(0).max(5),
+    },
+  ],
+};
