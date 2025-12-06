@@ -10,16 +10,16 @@ import React from "react";
 import {Footer} from "@/components/layout/footer";
 
 // Helvetica Regular from public folder
-const helveticaRegular = localFont({
-  src: [
-    {
-      path: '../public/HelveticaRegular.otf',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-helvetica-regular',
-});
+// const helveticaRegular = localFont({
+//   src: [
+//     {
+//       path: '../public/HelveticaRegular.otf',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//   ],
+//   variable: '--font-helvetica-regular',
+// });
 
 // Luxurious Script from Google Fonts
 const luxuriousScript = Luxurious_Script({
@@ -42,7 +42,7 @@ const luxurious = Inter({
   variable: '--font-luxurious',
 });
 
-const geistSans = Inter({
+const geistSans = Montserrat({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   weight:["400"]
@@ -113,7 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={` ${geistMono.variable} ${helveticaRegular.variable} ${luxuriousScript.variable} antialiased`}
+        className={` ${geistMono.variable} ${geistSans.className} ${luxuriousScript.variable} antialiased`}
       >
         <Header />
         <div className="px-2  md:max-w-[1000px] md:mx-auto min-h-screen">{children}</div>        <Footer/>
