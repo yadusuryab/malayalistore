@@ -15,14 +15,14 @@ function Header() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [currentTopText, setCurrentTopText] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null); // Initialize as null
   const [isAnimating, setIsAnimating] = useState(false);
   const [menuAnimation, setMenuAnimation] = useState("closed");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const topTexts = [" COLLECTIONS", "#PREMIUMSTYLE", "EXCLUSIVE DESIGNS"];
 
-  // Handle mobile detection
+  // Handle mobile detection - client-side only
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -35,6 +35,8 @@ function Header() {
 
   // Rotate top bar text with animation
   useEffect(() => {
+    if (isMobile === null) return; // Don't start animations until we know the device
+    
     const interval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
@@ -43,7 +45,7 @@ function Header() {
       }, 500);
     }, 4000);
     return () => clearInterval(interval);
-  }, [topTexts.length]);
+  }, [topTexts.length, isMobile]);
 
   // Focus search input when search is opened
   useEffect(() => {
@@ -56,6 +58,8 @@ function Header() {
 
   // Handle menu animation states
   useEffect(() => {
+    if (isMobile === null) return; // Don't set body styles until we're on client
+    
     if (isSheetOpen) {
       setMenuAnimation("opening");
       document.body.style.overflow = 'hidden';
@@ -71,7 +75,7 @@ function Header() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isSheetOpen]);
+  }, [isSheetOpen, isMobile]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,6 +125,44 @@ function Header() {
     return `animate-in slide-in-from-left-full fade-in duration-500 ease-out fill-mode-backwards`;
   };
 
+  // Prevent rendering until we know if we're on mobile or desktop
+  if (isMobile === null) {
+    return (
+      <>
+        {/* Top Black Bar (static for initial render) */}
+        <div className="fixed top-0 left-0 w-full bg-black text-white py-2 z-50">
+          <div className="container mx-auto px-4 flex justify-between items-center">
+            <div className="text-center text-sm font-medium uppercase tracking-wide h-5 flex items-center justify-center">
+              <span>#PREMIUMSTYLE</span>
+            </div>
+            <Link
+              href="/cart"
+              className="transition-all duration-300 hover:scale-110 relative flex items-center gap-2"
+            >
+              <IconShoppingBag size={20} />
+              <span className="text-xs">MY CART</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Header skeleton to prevent layout shift */}
+        <header className="fixed bg-white/50 saturate-200 backdrop-blur-2xl top-8 w-full z-40">
+          <div className="p-6">
+            {/* Simplified header that works for both mobile and desktop initially */}
+            <div className="flex items-center justify-between">
+              <div className="w-32 h-8 bg-gray-200 animate-pulse rounded"></div>
+              <div className="flex items-center gap-4">
+                <div className="w-6 h-6 bg-gray-200 animate-pulse rounded"></div>
+                <div className="w-6 h-6 bg-gray-200 animate-pulse rounded"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="h-28 md:h-32"></div>
+      </>
+    );
+  }
+
   return (
     <>
       {/* Top Black Bar */}
@@ -138,56 +180,49 @@ function Header() {
             </span>
           </div>
           <Link
-        href="/cart"
-        className=" transition-all duration-300 hover:scale-110 relative flex items-center gap-2"
-      >
-        <IconShoppingBag size={20} />
-        <span className=" sm:inline text-xs">MY CART</span>
-        {/* Cart indicator */}
-      </Link>
+            href="/cart"
+            className="transition-all duration-300 hover:scale-110 relative flex items-center gap-2"
+          >
+            <IconShoppingBag size={20} />
+            <span className="sm:inline text-xs">MY CART</span>
+          </Link>
         </div>
       </div>
 
       {/* Main Header */}
-      <header className="fixed bg-white/50 saturate-200 backdrop-blur-2xl top-8 w-full z-40 ">
-      {isMobile ? (
-  // Mobile View
-  <div className="flex items-center justify-between p-2">
-    {/* Menu Button */}
-    <button 
-      onClick={handleMenuToggle}
-      className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 uppercase text-sm font-medium tracking-wide flex items-center gap-2"
-      aria-label="Open menu"
-    >
-      <IconMenu />
-      {/* <span>MENU</span> */}
-    </button>
-    
-    {/* Logo - Centered with flex-1 and proper alignment */}
-    <div className="flex-1 flex justify-center">
-      <Link href="/" className="transform transition-transform duration-300 hover:scale-105">
-        <Brand />
-      </Link>
-    </div>
-    
-    {/* Right Icons */}
-    <div className="flex items-center gap-4">
-      {/* Search Icon */}
-      <button 
-        onClick={handleSearchToggle}
-        className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 flex items-center gap-2"
-        aria-label="Search"
-      >
-        {/* <IconSearch size={20} /> */}
-        <span className=" sm:inline"><IconSearch size={20} /></span>
-      </button>
-      
-      {/* Cart */}
-    
-    </div>
-  </div>
-) : (
-  // Desktop view would go her : (
+      <header className="fixed bg-white/50 saturate-200 backdrop-blur-2xl top-8 w-full z-40">
+        {isMobile ? (
+          // Mobile View
+          <div className="flex items-center justify-between p-2">
+            {/* Menu Button */}
+            <button 
+              onClick={handleMenuToggle}
+              className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 uppercase text-sm font-medium tracking-wide flex items-center gap-2"
+              aria-label="Open menu"
+            >
+              <IconMenu />
+            </button>
+            
+            {/* Logo - Centered with flex-1 and proper alignment */}
+            <div className="flex-1 flex justify-center">
+              <Link href="/" className="transform transition-transform duration-300 hover:scale-105">
+                <Brand />
+              </Link>
+            </div>
+            
+            {/* Right Icons */}
+            <div className="flex items-center gap-4">
+              {/* Search Icon */}
+              <button 
+                onClick={handleSearchToggle}
+                className="p-2 transition-all duration-300 ease-out hover:scale-110 active:scale-95 hover:opacity-70 flex items-center gap-2"
+                aria-label="Search"
+              >
+                <IconSearch size={20} />
+              </button>
+            </div>
+          </div>
+        ) : (
           // Desktop View
           <div className="flex items-center justify-between p-6">
             {/* Logo - Left */}
@@ -297,7 +332,7 @@ function Header() {
       </header>
 
       {/* Mobile Menu */}
-      <Sheet open={isSheetOpen}  onOpenChange={setIsSheetOpen}>
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetContent 
           side="left" 
           className={`w-80 p-0 border-r border-gray-200 bg-white transition-all duration-500 ease-in-out ${
@@ -308,7 +343,7 @@ function Header() {
         >
           <div className="flex flex-col h-full">
             {/* Header */}
-            <div className="flex items-center justify-between p-8 border-b border-gray-200 ">
+            <div className="flex items-center justify-between p-8 border-b border-gray-200">
               <span className="uppercase font-bold text-2xl tracking-widest">MENU</span>
               <button 
                 onClick={closeMenu}
@@ -327,11 +362,11 @@ function Header() {
                     <SheetClose asChild>
                       <Link
                         href={item.href}
-                        className={`block py-4 uppercase text-2xl font-bold tracking-wider transition-all duration-700 ease-out 
+                        className={`block py-4 uppercase text-lg font-bold tracking-wider transition-all duration-700 ease-out 
                                    hover:opacity-80 hover:translate-x-4 hover:text-gray-800 border-b-2 border-transparent
                                    hover:border-black transform origin-left ${
                                      menuAnimation === "open" 
-                                       ? `animate-in slide-in-from-left-full fade-in duration-700 ease-out fill-mode-backwards delay-${index * 100}`
+                                       ? `animate-in slide-in-from-left-full fade-in duration-700 ease-out fill-mode-backwards`
                                        : ""
                                    }`}
                         style={{ animationDelay: `${index * 100}ms` }}
@@ -348,12 +383,12 @@ function Header() {
             <div className="p-8 border-t border-gray-200 bg-black text-white">
               <div className="space-y-4">
                 <div className="invert">
-                <Brand />
+                  <Brand />
                 </div>
                 <p className="text-sm uppercase tracking-widest text-gray-300">#PREMIUMSTYLE</p>
                 <div className="pt-4 text-xs text-gray-400 uppercase tracking-wide border-t border-gray-700">
                   <p>Explore Exclusive Collections</p>
-                  <p className="mt-2"> Redefined</p>
+                  <p className="mt-2">Redefined</p>
                 </div>
               </div>
             </div>

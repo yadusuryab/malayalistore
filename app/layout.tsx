@@ -45,7 +45,7 @@ const luxurious = Inter({
 const geistSans = Montserrat({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight:["400"]
+  weight:["400","600","700"]
 });
 
 const geistMono = Geist_Mono({
