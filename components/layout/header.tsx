@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Brand from "../utils/brand";
 import { buttonVariants } from "../ui/button";
-import { ShoppingBag, Truck, Search, X, Menu, Home, FileText, User, MenuIcon } from "lucide-react";
+import { ShoppingBag, Truck, Search, X, Menu, Home, FileText, User, MenuIcon, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "../ui/sheet";
@@ -362,7 +362,7 @@ function Header() {
                     <SheetClose asChild>
                       <Link
                         href={item.href}
-                        className={`block py-4 uppercase text-lg font-bold tracking-wider transition-all duration-700 ease-out 
+                        className={`block  uppercase text-md font-semibold tracking-wider transition-all duration-700 ease-out 
                                    hover:opacity-80 hover:translate-x-4 hover:text-gray-800 border-b-2 border-transparent
                                    hover:border-black transform origin-left ${
                                      menuAnimation === "open" 
@@ -373,6 +373,7 @@ function Header() {
                       >
                         {item.label}
                       </Link>
+                      
                     </SheetClose>
                   </li>
                 ))}
