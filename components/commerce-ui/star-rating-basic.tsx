@@ -49,7 +49,7 @@ StarIcon.displayName = "StarIcon";
 
 const StarRating_Basic = ({
   className,
-  color = "primary",
+  color = "",
   iconSize = 24,
   maxStars = 5,
   onChange,

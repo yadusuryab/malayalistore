@@ -1,13 +1,26 @@
 import type { Metadata } from "next";
-import { Audiowide, Geist, Geist_Mono, Inter, Luxurious_Script, Michroma, Montserrat, Quantico } from "next/font/google";
-import localFont from 'next/font/local';
+import {
+  Audiowide,
+  Geist,
+  Geist_Mono,
+  Inter,
+  Luxurious_Script,
+  Michroma,
+  Montserrat,
+  Quantico,
+} from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/layout/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
-import OGImage from '@/public/og-image.png'
+import OGImage from "@/public/og-image.png";
 import React from "react";
-import {Footer} from "@/components/layout/footer";
+import { Footer } from "@/components/layout/footer";
+import { Button } from "@/components/ui/button";
+import PulsingCircle from "@/components/sections/pulsing-circle";
+import { IconBrandWhatsapp } from "@tabler/icons-react";
+import { WhatsAppButton } from "@/components/utils/whatsapp-button";
 
 // Helvetica Regular from public folder
 // const helveticaRegular = localFont({
@@ -25,7 +38,7 @@ import {Footer} from "@/components/layout/footer";
 const luxuriousScript = Luxurious_Script({
   subsets: ["latin"],
   weight: ["400"],
-  variable: '--font-luxurious-script',
+  variable: "--font-luxurious-script",
 });
 
 // Alternative: If you want the actual Luxurious Script font, use this instead:
@@ -39,13 +52,13 @@ const luxuriousScript = Luxurious_Script({
 const luxurious = Inter({
   subsets: ["latin"],
   weight: ["400"],
-  variable: '--font-luxurious',
+  variable: "--font-luxurious",
 });
 
 const geistSans = Montserrat({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight:["400","600","700"]
+  weight: ["400", "600", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -54,8 +67,7 @@ const geistMono = Geist_Mono({
 });
 
 // You can store OG image path also in env if you want different brand banners
-const OG_IMAGE =
-  process.env.NEXT_PUBLIC_OG_IMAGE || "/default-og.jpg"; // fallback if not set
+const OG_IMAGE = process.env.NEXT_PUBLIC_OG_IMAGE || "/default-og.jpg"; // fallback if not set
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -116,7 +128,11 @@ export default function RootLayout({
         className={` ${geistMono.variable} ${geistSans.className} ${luxuriousScript.variable} antialiased`}
       >
         <Header />
-        <div className="px-2  md:max-w-[1000px] md:mx-auto min-h-screen">{children}</div>        <Footer/>
+        <div className=" px-2  md:max-w-[1000px] md:mx-auto min-h-screen">
+          {children}
+        </div>{" "}
+       <WhatsAppButton/>
+        <Footer />
         <Toaster />
       </body>
     </html>

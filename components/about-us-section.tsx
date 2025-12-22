@@ -113,10 +113,10 @@ export default function AboutUsSection() {
 
   const stats = [
     { icon: <Award />, value: 3, label: "Years in Market", suffix: "+" },
-    { icon: <Users />, value: 6246, label: "Instagram Followers", suffix: "+" },
+    { icon: <Users />, value: 10164, label: "Instagram Followers", suffix: "+" },
     {
       icon: <TrendingUp />,
-      value: 17423,
+      value: 10000,
       label: "Happy Customers",
       suffix: "+",
     },
